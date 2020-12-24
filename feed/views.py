@@ -77,3 +77,5 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
     success_url = '/moments'
+
+    # just checking
