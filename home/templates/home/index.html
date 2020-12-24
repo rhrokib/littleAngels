@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<title>Little Angels</title>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="{% url 'home' %}"><img src="{% static 'home/images/logo.png' %}"  width="170px"></a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'adoption' %}">Adoption</a></li>
+                        <li><a href="#">Vets</a></li>
+                        <li><a href="#">Food & Grocery</a></li>
+                        <li><a href="{% url 'feed' %}">Happy Moments</a></li>
+                        <li><a href="{% url 'emergency' %}">Emergency Links</a></li>
+                    </ul>
+                </nav>
+                <img src="{% static 'home/images/menu.png' %}" class="menu-icon">
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <h1>Love Is A Four Legged Word!</h1>
+                    <p>"It takes nothing away from a human to be kind to an animal"</p>
+                    <a href="" class="btn">Explore Now &#8594;</a>
+                </div>
+                <div class="col-2">
+                    <img src="{% static 'home/images/image1.jpg' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
