@@ -11,29 +11,8 @@ class Profile(models.Model):
         return self.user.username
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # def save(self):
-    #     super().save()
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
     #     img = Image.open(self.image.path)
 
     #     # Resizing the image to 300x300 px
