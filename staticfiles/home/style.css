@@ -1,0 +1,101 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html,body{
+    font-family: 'Comfortaa', cursive;
+    display: grid;
+    height: 100%;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+nav{
+    flex: 1;
+    text-align: right;
+    font-size: 14px;
+}
+nav ul{
+    display: inline-block;
+    list-style-type: none;
+}
+nav ul li{
+    display: inline-block;
+    margin-right: 20px;
+    font-weight: bold;
+}
+nav ul li:hover{
+    text-decoration: underline;
+}
+a{
+    text-decoration: none;
+    color: #555;
+}
+p{
+    color: #555;
+}
+.container{
+    max-width: 1400px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.row_1{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.col-2{
+    flex-basis: 50%;
+    min-width: 300px;
+}
+.col-2 img{
+    max-width: 100%;
+    padding: 50px 0;
+}
+.col-2 h1{
+    font-size: 40px;
+    line-height: 50px;
+    margin: 20px 0;
+    font-family: 'Indie Flower', cursive;
+}
+.col-2 p{
+    font-size: 20px;
+    margin: 20px 0;
+    font-family: 'Indie Flower', cursive;
+}
+.btn{
+    display: inline-block;
+    background: #94d9b0;
+    color: #fff;
+    padding: 8px 30px;
+    border-radius: 30px;
+    transition: background 0.5s;
+}
+.btn:hover{
+    background: #008134;
+}
+.header{
+    background: radial-gradient(#fff, #ecfdf3);
+}
+.header .row{
+    margin-top: 70px;
+}
+
+.feed{
+    max-width: 140px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;  
+    font-family: "Helvetica Neue", "Consolus";
+}
