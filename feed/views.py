@@ -6,8 +6,8 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView 
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
-
+from PIL import Image
+import os
 # Create your views here.
 
 
@@ -45,9 +45,10 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
 
 
+# Creating and deletion
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'image']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -56,7 +57,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'image']
 
     def form_valid(self, form):
         form.instance.author = self.request.user

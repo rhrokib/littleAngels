@@ -7,7 +7,7 @@
 	<title>Little Angels</title>
     <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
     <link rel="stylesheet" href="{% static 'home/style.css' %}">
-    <link rel="stylesheet" href="{% static 'home/main.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'home/main.css' %}"> -->
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,7 +17,7 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <a href="{% url 'home' %}"><img src="{% static 'home/images/logo.png' %}"  width="170px"/></a>
+                    <a href="{% url 'home' %}"><img weight="200px" src="{% static 'home/images/logo.png' %}"  width="170px"/></a>
                 </div>
                 <nav>
                     <ul>
@@ -28,7 +28,7 @@
                         <li><a href="{% url 'emergency' %}">Emergency Links</a></li>
                     </ul>
                 </nav>
-                <img src=" {% static 'home/images/menu.png' %}" class="menu-icon">
+                <img width="20px" src=" {% static 'home/images/menu.png' %}" class="menu-icon">
             </div>
         </div>
     </div>

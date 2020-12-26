@@ -7,7 +7,7 @@
 {% block content %}
     {% for p in posts %}
         <article class="media content-section">
-            <img  class="rounded-circle article-img" src="{{p.author.profile.image.url}}" alt="">
+            <img class="rounded-circle article-img" src="{{p.author.profile.image.url}}" alt="">
             <div class="media-body">
             <div class="article-metadata">
                 <a class="mr-2" href="{% url 'user_posts' p.author.username %}">{{ p.author }}</a>

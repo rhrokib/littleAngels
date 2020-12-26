@@ -1,4 +1,5 @@
 {% extends 'home/base.html' %}
+{% load static %}
 {% block content %}
 
     <article class="media content-section">
@@ -16,6 +17,11 @@
         </div>
         <h2 class="article-title">{{ object.title }}</h2>
         <p class="article-content">{{ object.content }}</p>
+        {%if object.image %}
+        <div>
+            <img class="article-content" width="300px"; src="{{object.image.url|default_if_none:'#'}}">
+        </div>
+        {%endif%}
         </div>
     </article>
     {% endblock content %}
