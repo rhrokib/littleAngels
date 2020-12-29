@@ -1,27 +1,18 @@
 
 {% extends 'home/base.html' %}
 {%block create_post %}
-<a class="nav-item nav-link" href="{% url 'adoption_post_create' %}">New Post</a>
+<a class="nav-item nav-link" class="btn btn-nav" h href="{% url 'adoption_post_create' %}">[+]</a>
 {% endblock %}
 
 {% block content %}
-    <div>
-        <h2>Adoption Posts<h2>
-    </div>
+    <h1 class="mb-3">Posts by: {{ view.kwargs.username}} ({{page_obj.paginator.count}})</h1>
     {% for p in posts %}
         <article class="media content-section">
-            <img class="rounded-circle article-img" src="{{p.author.profile.image.url}}" alt="">
+            <img  class="rounded-circle article-img" src="{{p.author.profile.image.url}}" alt="">
             <div class="media-body">
             <div class="article-metadata">
                 <a class="mr-2" href="{% url 'adoption_user_posts' p.author.username %}">{{ p.author }}</a>
                 <small class="text-muted">{{ p.date| date:"F d, y"}}</small>
-                {% if p.isAdopted == True %}
-                    <small class="text-muted">✅</small>
-                {% endif %}
-            </div>
-            <div>
-                <small class="text-muted">{{p.location }} </small>
-                <small class="text-muted">  {{p.contact}}</small>
             </div>
             <h2><a class="article-title" href="{% url 'adoption_post_detail' p.id %}">{{ p.title }}</a></h2>
             <p class="article-content">{{ p.content }}</p>

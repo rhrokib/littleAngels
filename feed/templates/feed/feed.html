@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+    <div>
+        <h2>Happy Moments<h2>
+    </div>
     {% for p in posts %}
         <article class="media content-section">
             <img class="rounded-circle article-img" src="{{p.author.profile.image.url}}" alt="">
