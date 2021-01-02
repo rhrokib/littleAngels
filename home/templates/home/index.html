@@ -2,44 +2,291 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-	<title>Little Angels</title>
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
-    <link rel="stylesheet" href="{% static 'home/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Little Angels</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'home/style.css' %}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+  </head>
+  <body>
     <div class="header">
-        <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    <a href="{% url 'home' %}"><img src="{% static 'home/images/logo.png' %}"  width="170px"></a>
-                </div>
-                <nav>
+      <div class="container">
+        <div class="navbar">
+          <div class="logo">
+            <a href="{% url 'home' %}"
+              ><img src="{% static 'home/images/logo.png' %}" width="170px"
+            /></a>
+          </div>
+          <nav>
+            <ul id="MenuItems">
+              <li>
+                <input
+                  type="search"
+                  autocomplete="off"
+                  id="search"
+                  placeholder="Search"
+                />
+              </li>
+              <li class="underline">
+                <a
+                  style="color: rgb(77, 77, 77); text-decoration: none"
+                  href="{% url 'adoption' %}"
+                  >Adoption</a
+                >
+              </li>
+              <li class="underline">
+                <a
+                  style="color: rgb(77, 77, 77); text-decoration: none"
+                  href="{% url 'feed' %}"
+                  >Moments</a
+                >
+              </li>
+              <li class="underline">
+                <a style="color: rgb(77, 77, 77); text-decoration: none" href=""
+                  >Vets</a
+                >
+              </li>
+              <li class="underline">
+                <a
+                  style="color: rgb(77, 77, 77); text-decoration: none"
+                  href="#"
+                  >F&G</a
+                >
+              </li>
+              <li class="underline">
+                <a
+                  style="color: rgb(77, 77, 77); text-decoration: none"
+                  href="#"
+                  >Emergency Links</a
+                >
+              </li>
+
+              {% if user.is_authenticated %}
+                {% block create_post %}
+                {% endblock %}
+
+                <li class="underline">
+                  <a
+                    class="nav-item nav-link mt-1"
+                    style="color: lightgray"
+                    title="Profile"
+                    href="{% url 'profile' %}"
+                  >
+                    <img
+                      width="27"
+                      height="27"
+                      style="border-radius: 50%"
+                      src="{{user.profile.image.url}}"
+                      alt=""
+                    />
+                  </a>
+                  <div class="sub-menu">
                     <ul>
-                        <li><a href="{% url 'adoption' %}">Adoption</a></li>
-                        <li><a href="#">Vets</a></li>
-                        <li><a href="#">Food & Grocery</a></li>
-                        <li><a href="{% url 'feed' %}">Happy Moments</a></li>
-                        <li><a href="{% url 'emergency' %}">Emergency Links</a></li>
+                      <li>
+                        <a
+                          style="color: rgb(126, 27, 27); text-decoration: none"
+                          href="{% url 'logout' %}"
+                          >Logout</a
+                        >
+                      </li>
                     </ul>
-                </nav>
-                <img src="{% static 'home/images/menu.png' %}" class="menu-icon">
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    <h1>Love Is A Four Legged Word!</h1>
-                    <p>"It takes nothing away from a human to be kind to an animal"</p>
-                    <a href="" class="btn">Explore Now &#8594;</a>
-                </div>
-                <div class="col-2">
-                    <img src="{% static 'home/images/image1.jpg' %}">
-                </div>
-            </div>
+                  </div>
+                </li>
+              {% else %}
+                <li>
+                  <a class="btnn" href="{% url 'login' %}">Login</a>
+                </li>
+              {% endif %}
+
+            </ul>
+          </nav>
+          <img
+            src="{% static 'home/images/menu.png' %}"
+            class="menu-icon"
+            onclick="menuToggle()"
+          />
         </div>
+        <div class="row">
+          <div class="col-2">
+            <h1>Love Is A Four Legged Word!</h1>
+            <p>"It takes nothing away from a human to be kind to an animal"</p>
+            <a href="{% url 'feed' %}" class="btnn">Explore Now &#8594;</a>
+          </div>
+          <div class="col-2">
+            <img src="{% static 'home/images/image1.jpg' %}" />
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+
+    <!--featured categories-->
+    <div class="categories">
+      <div class="small-container">
+        <h2 class="title">Services</h2>
+        <div class="row">
+          <div class="col-3">
+            <img src="{% static 'home/images/category-1.jpg' %}" />
+          </div>
+          <div class="col-3">
+            <img src="{% static 'home/images/category-2.jpg' %}" />
+          </div>
+          <div class="col-3">
+            <img src="{% static 'home/images/category-3.jpg' %}" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--featured producsts-->
+    <div class="small-container">
+      <h2 class="title">Featured Products</h2>
+      <div class="row">
+        <div class="col-4">
+          <img src="{% static 'home/images/product-1.png' %}" />
+          <h4>Whiskas Dry Cat Food (Adult)</h4>
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+          <br />
+          <p>৳400</p>
+        </div>
+        <div class="col-4">
+          <img src="{% static 'home/images/product-2.jpg' %}" />
+          <h4>Authority Indoor Adult Cat Food</h4>
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+          </div>
+          <br />
+          <p>৳1500</p>
+        </div>
+        <div class="col-4">
+          <img src="{% static 'home/images/product-3.jpg' %}" />
+          <h4>Pedigree Dry Complete Dog Food with Chicken (Adult)</h4>
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+          <br />
+          <p>৳450</p>
+        </div>
+        <div class="col-4">
+          <img src="{% static 'home/images/product-1.png' %}" />
+          <h4>Purina Beneful Originals Dry Dog Food (Adult)</h4>
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+          <br />
+          <p>৳2200</p>
+        </div>
+      </div>
+      <h2 class="title">Best Moments</h2>
+      <div class="row_1 owl-carousel">
+        <div class="col-5">
+          <img src="{% static 'home/images/happy_moments-1.jpeg' %}" />
+          <h4>Time</h4>
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+        </div>
+        <div class="col-5">
+          <img src="{% static 'home/images/happy_moments-2.jpg' %}" />
+          <h4>Time</h4>
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+          </div>
+        </div>
+        <div class="col-5">
+          <img src="{% static 'home/images/happy_moments-3.jpeg' %}" />
+          <h4>Time</h4>
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+        </div>
+        <div class="col-5">
+          <img src="{% static 'home/images/happy_moments-4.jpg' %}" />
+          <h4>Time</h4>
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--testimonial-->
+    <!--brand widget-->
+    <!--footer-->
+
+    <script>
+      $(".row_1").owlCarousel({
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+      });
+      var MenuItems = document.getElementById("MenuItems");
+      MenuItems.style.maxHeight = "0px";
+
+      function menuToggle() {
+        if (MenuItems.style.maxHeight == "0px") {
+          MenuItems.style.maxHeight = "200px";
+        } else {
+          MenuItems.style.maxHeight = "0px";
+        }
+      }
+    </script>
+  </body>
 </html>
+>

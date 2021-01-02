@@ -1,12 +1,14 @@
-{% extends 'home/base.html' %}
-{% load crispy_forms_tags %}
-{% block content %}
+{% extends 'home/base.html' %} {% load crispy_forms_tags %} {% block content %}
+<div class="boss">
+  <div class="blog-post">
     <h2>Account Logged out</h2>
     <div class="content-section">
-        <div class="border-tio pt-3">
-            <small class="text-muted">
-                Log in again? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-            </small>
-        </div>
+      <div class="border-tio pt-3">
+        <small class="text-muted">
+          Log in again? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+        </small>
+      </div>
     </div>
+  </div>
+</div>
 {% endblock content %}

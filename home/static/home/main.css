@@ -1,5 +1,5 @@
-body {
-    background: #accfbc;
+/* body {
+    background: #e4f1ea;
     color: #333333;
     margin-top: 5rem;
   }
@@ -13,35 +13,41 @@ body {
   }
   
   .bg-steel {
-    background-color: #50b39a;
+    background-color: #292233;
   }
   
   .site-header .navbar-nav .nav-link {
-    color: #cbd5db;
+    color: #cecece;
   }
   
   .site-header .navbar-nav .nav-link:hover {
-    color: #ffffff;
+    color: #a75252;
   }
   
   .site-header .navbar-nav .nav-link.active {
-    font-weight: 500;
-  }
+    font-weight: 700;
+  } */
   
   .content-section {
-    background: #ffffff;
+    background: #effdf9;
     padding: 10px 20px;
     border: 1px solid #dddddd;
     border-radius: 3px;
     margin-bottom: 20px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 3px 3px 5px 3px #ccc;;
+  
   }
   
   .article-title {
     color: #444444;
+    font-family: Roboto;
   }
   
   a.article-title:hover {
-    color: #428bca;
+    color: #2f7e77;
     text-decoration: none;
   }
   
@@ -82,3 +88,8 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+
+  /* .logo {
+    padding-top: 0px;
+    padding-left: -inherit;
+  } */

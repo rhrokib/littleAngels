@@ -1,84 +1,102 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoption Details - Little Angels</title>
+    
+	
     <link rel="icon" href="https://image.flaticon.com/icons/png/512/2138/2138440.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'home/main.css' %}">
-    <!-- <link rel="stylesheet" href="{% static 'home/style.css' %}"> -->
-
-
-    {% if title %}
-    <title>LA | {{title}}</title>
-    {% else %}
-    <title>Little Angels 🐱 </title>
-    {% endif %}
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/style-details.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'home/style-create-post.css' %}"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}"> -->
 </head>
-
 <body>
-    <header class="site-header">
-        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-          <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarToggle">
-              <div class="navbar-nav mr-auto">
-                <div class="logo">
-                  <a href="{% url 'home' %}"><img src="{% static 'home/images/logo.png' %}" padding-top="10" width="170px"></a>
-              </div>
-                
-                <a class="nav-item nav-link" href="{% url 'adoption' %}">Adoption</a>
-                <a class="nav-item nav-link" href="{% url 'feed' %}">Moments</a>
-                <a class="nav-item nav-link" href="#">F&G</a>
-                <a class="nav-item nav-link" href="#">Emergency</a>
-              </div>
-              <!-- Navbar Right Side -->
-              <div class="navbar-nav">
-                {% if user.is_authenticated %}
-                {% block create_post %} {% endblock %}
-                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-
-                {%else %}
-                  <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                  <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'home' %}"><img src="{% static 'home/images/logo.png' %}" padding-top="10" width="170px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><input type="search" autocomplete="off" id="search" placeholder="Search"></li>    
+                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="{% url 'adoption' %}">Adoption</a>
+                    </li>
+                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="{% url 'feed' %}">Moments</a></li>
+                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="">Vets</a></li>
+                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="#">F&G</a></li>
+                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="#">Emergency Links</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        {% block create_post %} {% endblock %}
+                    
+                            <li class="underline">
+                                <a class="nav-item nav-link mt-1" style="color: lightgray" title="Profile" href="{% url 'profile' %}">
+                                    <img  width="27" height="27" style="border-radius:50%"  src="{{user.profile.image.url}}" alt="">
+                                </a>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li><a style="color: rgb(126, 27, 27); text-decoration: none;" href="{% url 'logout' %}">Logout</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                    {% else %}
+                    <li>
+                        <a class="btnn" href="{% url 'login' %}">Login</a>
+                      </li>
                 {% endif %}
-              </div>
-            </div>
-          </div>
-        </nav>
-    </header>
+                </ul>
+            </nav>
+            <img src="/images/menu.png" class="menu-icon" onclick="menuToggle()">
+        </div> 
+    </div>
 
-    <main role="main" class="container">
-        <div class="row">
-            <div class="col-md-8">
-              {% if massages %}
-                {% for m in messages %}
-                  <div class="alert alerat-{{ m.tags}}">
-                    {{ m }}
-                  </div>
-                {% endfor %}
-              {% endif %}
-              {% block content %}{% endblock %}
-            </div>
-            <!-- Sidebar -->
-        </div>
-    </main>
+    {% block content %} {% endblock %}
 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
- 
+<!--footer-->
     
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        
+        function menuToggle(){
+            if(MenuItems.style.maxHeight == "0px"){
+                MenuItems.style.maxHeight = "200px";
+            }
+            else{
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+        
+        var textArea = document.getElementById("edit");
+        var editButton = document.getElementById("toggle");
+        var deleteButton = document.getElementById("delete");
+        textArea.style.display = "none";
+        
+        function editText(){
+            if(editButton.innerHTML == "Edit"){
+                editButton.style.backgroundColor = "#94d9b0";
+                editButton.innerHTML = "Update";
+                textArea.style.display = "block";
+                deleteButton.style.display = "none";
+            }
+            else{
+                textArea.style.display = "none";
+                editButton.style.backgroundColor = "#034f84";
+                editButton.innerHTML = "Edit";
+                deleteButton.style.display = "inline-block";
+            }
+        }
+    </script>
 </body>
 </html>

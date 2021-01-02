@@ -1,14 +1,19 @@
 
 {% extends 'home/base.html' %}
-{%block create_post %}
-<a class="nav-item nav-link" href="{% url 'adoption_post_create' %}">New Post</a>
-{% endblock %}
 
 {% block content %}
+<div class="boss">
+    <div class="blog-post">
     <div>
-        <h2>Adoption Posts<h2>
+        <h2>Adoption Posts<h2> 
+        <div class="form-group">
+            <a href="{% url 'adoption_post_create' %}">
+                <button class="btn btn-outline-primary" type="submit" style="background-color:rgb(13, 165, 114); outline-style:none; color:white">+ New Post</button>
+            </a>
+        </div>
     </div>
-    {% for p in posts %}
+    
+            {% for p in posts %}
         <article class="media content-section">
             <img class="rounded-circle article-img" src="{{p.author.profile.image.url}}" alt="">
             <div class="media-body">
@@ -48,5 +53,7 @@
             <a class="btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages}}">Last</a>
         {% endif %}
     {% endif %}
+        </div>
+    </div>
 
 {% endblock content %}

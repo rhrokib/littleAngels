@@ -4,7 +4,7 @@ import requests
 
 
 def home(request):
-    return render(request, "home/home.html", {'title': 'home'})
+    return render(request, "home/index.html", {'title': 'home'})
 
 
 def index(request):

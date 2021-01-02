@@ -1,7 +1,10 @@
 {% extends 'home/base.html' %}
 {% load static %}
-{% block content %}
 
+{% block content %}
+<div class="boss">
+    <div class="blog-post">
+        
     <article class="media content-section">
         <img class="rounded-circle article-img" src="{{object.author.profile.image.url}}" alt="DP"">
         <div class="media-body">
@@ -19,9 +22,11 @@
         <p class="article-content">{{ object.content }}</p>
         {%if object.image %}
         <div>
-            <img class="article-content" width="300px"; src="{{object.image.url|default_if_none:'#'}}">
+            <img style="text-align: center; object-fit: fill" class="article-content" width="300px"; src="{{object.image.url|default_if_none:'#'}}">
         </div>
         {%endif%}
         </div>
     </article>
-    {% endblock content %}
+    </div>
+</div>
+{% endblock content %}
