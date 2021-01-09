@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileSetForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -11,26 +11,31 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account Created for {username}')
-            return redirect ('home')
+            return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form' : form})
+
+    context = {
+        'form': form
+    }
+    return render(request, 'users/register.html', context)
+
 
 @login_required
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        p_form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
 
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
             messages.success(request, f'Your profile has been updated!')
-            return redirect ('profile')
+            return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm( instance=request.user.profile)
-
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'u_form': u_form,
@@ -38,3 +43,19 @@ def profile(request):
     }
 
     return render(request, 'users/profile.html', context)
+
+
+def FirstProfile(request):
+    if request.method == 'POST':
+        form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your profile has been updated!')
+            return redirect('home')
+    else:
+        form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {'form': form}
+    return render(request, 'users/account_setup.html', context)

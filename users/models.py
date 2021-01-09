@@ -3,13 +3,20 @@ from django.contrib.auth.models import User
 from PIL import Image
 import os
 
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.png',  upload_to= 'profile_pics')
+    accTypes= [
+    ('normal', 'Normal'),
+    ('vet', 'Vetenarian'),
+    ('shop', 'Shop Owner')
+    ]
     
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(default='default.png',  upload_to='profile_pics')
+    user_type = models.CharField(max_length=30, choices = accTypes, default='null')
+
     def __str__(self):
         return self.user.username
-
 
     # def save(self, *args, **kwargs):
     #     super().save(*args, **kwargs)
