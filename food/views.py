@@ -1,3 +1,69 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from .models import Shop
+from django.contrib.auth.models import User
+from django.views.generic import (
+    ListView, DetailView, CreateView, UpdateView, DeleteView
+)
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from PIL import Image
+import os
 # Create your views here.
+
+
+def home(request):
+    context = {
+        'posts': Shop.objects.all()
+    }
+
+    return render(request, 'food/food.html', context=context,)
+
+
+class PostListView(LoginRequiredMixin, ListView):
+    model = Shop
+    template_name = 'food/food.html'
+    context_object_name = 'posts'
+    ordering = ['-date']
+    paginate_by = 2
+
+
+class PostDetailView(LoginRequiredMixin, DetailView):
+    model = Shop
+
+
+# Creating and deletion
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Shop
+    fields = ['title', 'content', 'price', 'location', 'phone', 'image']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Shop
+    fields = ['title', 'content', 'price', 'location', 'phone', 'image']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Shop
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+    success_url = '/shop'
+
+    # just checking

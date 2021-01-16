@@ -1,0 +1,37 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="boss">
+    <div class="blog-post">
+        
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{object.author.profile.image.url}}" alt="DP"">
+        <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.author }}</a>
+            <small class="text-muted">{{ object.location }}</small>
+            {% if object.author == user %}
+                <div>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'vet_post_update' object.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'vet_post_delete' object.id %}">Delete</a>
+                </div>
+            {%endif %}
+        </div style="font-weight: 400;">
+        <h2 class="article-title">{{ object.vet_name }}</h2>
+        <p class="article-content" >{{ object.content }}</p>
+        <hr>
+        <p class="article-content">institute :{{ object.institute }}</p>
+        <p class="article-content">Certification : {{ object.certification }}</p>
+        <p class="article-content">Email :{{ object.author.email }}</p>
+        <p class="article-content">Phone :{{ object.phone }}</p>
+        {%if object.image %}
+        <div>
+            <img style="text-align: center; object-fit: fill" class="article-content" width="300px"; src="{{object.image.url|default_if_none:'#'}}">
+        </div>
+        {%endif%}
+        </div>
+    </article>
+    </div>
+</div>
+{% endblock content %}

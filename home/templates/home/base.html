@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adoption Details - Little Angels</title>
     
-	
+    {% block head %}{% endblock %}
     <link rel="icon" href="https://image.flaticon.com/icons/png/512/2138/2138440.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
@@ -20,6 +20,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'home/style-details.css' %}">
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'home/style-create-post.css' %}"> -->
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}"> -->
+
+    
 </head>
 <body>
     <div class="container">
@@ -33,9 +35,9 @@
                     <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="{% url 'adoption' %}">Adoption</a>
                     </li>
                     <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="{% url 'feed' %}">Moments</a></li>
-                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="">Vets</a></li>
-                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="#">F&G</a></li>
-                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="#">Emergency Links</a></li>
+                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="{% url 'vet' %}">Vets</a></li>
+                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="{% url 'food' %}">F&G</a></li>
+                    <li class="underline"><a style="color: rgb(77, 77, 77); text-decoration: none;" href="{% url 'emergency' %}">Emergency Links</a></li>
                     
                     {% if user.is_authenticated %}
                         {% block create_post %} {% endblock %}

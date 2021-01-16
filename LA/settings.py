@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.7', 'localhost', 'little-angels.herokua
 
 INSTALLED_APPS = [
     'emergency.apps.EmergencyConfig',
+    'vet.apps.VetConfig',
+    'food.apps.FoodConfig',
     'crispy_forms',
     'users.apps.UsersConfig',
     'home.apps.HomeConfig',

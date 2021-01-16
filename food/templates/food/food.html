@@ -1,0 +1,78 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Food & Grocery - Little Angels</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'food/food_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="blog-post">
+    <div>
+        <h2>Find Necessary producsts<h2>
+        {% if user.profile.user_type == 'shop' %}
+            <div class="form-group">
+                <a href="{% url 'shop_create' %}">
+                    <button class="btn btn-outline-primary" type="submit" style="background-color:rgb(13, 165, 114); outline-style:none; color:white">[+] Add</button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+    {% for p in posts %}
+    <div class="small-container">
+        <div class="row">
+            <div class="col-4">
+                <img src="{{p.image.url|default_if_none:'#'}}">
+                <a href="{% url 'shop_detail' p.id %}" style="text-decoration:none"><h4>{{p.title}}</h4></a>
+                <h6>Price: BDT {{p.price}}</h6>
+                <p>{{p.content }}</p>
+                <hr>
+            </div>
+        </div>
+    </div>
+    {%endfor %}
+
+    {% if is_paginated %}
+        <div class="page-btn">
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-info mb-4" style="background:rgb(25, 134, 116); color:beige;" href="?page=1">First</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}">Previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a class="btn btn-info mb-4" href="?page={{num}}">{{num}}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{num}}">{{ num }}</a>
+
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a class="btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}}">Next</a>
+                <a class="btn btn-outline-info mb-4" class="prev" href="?page={{page_obj.paginator.num_pages}}">Last</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+<!--footer-->
+
+<script>
+    var MenuItems = document.getElementById("MenuItems");
+    MenuItems.style.maxHeight = "0px";
+    
+    function menuToggle(){
+        if(MenuItems.style.maxHeight == "0px"){
+            MenuItems.style.maxHeight = "200px";
+        }
+        else{
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+</script>
+{% endblock %}   

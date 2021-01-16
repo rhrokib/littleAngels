@@ -1,0 +1,76 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Vet | Little Angels</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'vet/info_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+{% endblock %}
+{% block content %}
+
+    <div class="brain">
+        <section id="aboutus">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h2>{{ object.vet_name }}</h2>
+                        <small>{{object.location }}</small>
+                        <h5>{{ object.certification }}</h5>
+                        <h6>{{ object.institute }}</h6>
+                        <hr>
+                        <ul>
+                            <li>{{ object.content }}</li>
+                        </ul>
+                        <div class="boss">
+                            <div class="boss-child">
+                                <h5>Schedule</h5>
+                                <div class="box">
+                                    <p>{{object.work_hours}}</p>
+                                </div>
+                            </div>
+                            <div class="boss-child">
+                                <h5>Contact</h5>
+                                <div class="box">
+                                    <p>Phone:{{ object.phone }}<br>E-Mail: {{ object.author.email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        {%if object.image %}
+                            <div class="img-wrap">
+                                <img src="{{object.image.url|default_if_none:'#'}}" alt="">
+                            </div>
+                        {%endif%}
+                    </div>
+                </div>
+                {% if object.author == user %}
+                    <div>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'vet_post_update' object.id %}">Update</a>
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'vet_post_delete' object.id %}">Delete</a>
+                        
+                    </div>
+                {%endif %}
+            </div>
+        </section>
+    </div>
+    <script>
+        const MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+
+        function menuToggle(){
+            if(MenuItems.style.maxHeight == "0px"){
+                MenuItems.style.maxHeight = "200px";
+            }
+            else{
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
+{% endblock %}
