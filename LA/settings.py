@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import django_heroku
 from pathlib import Path
 import os
 
@@ -24,9 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'x8*(b8d9463re+t)2mgi+vrbh7!9(s6_^6c5j(76yoqy!hp(19'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.7', 'localhost', 'little-angels.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.7',
+                 'localhost', 'little-angels.herokuapp.com']
 
 
 # Application definition
@@ -144,10 +146,9 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD= os.environ.get('EMAIL_PASSWORD')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 success_url = 'account_setup'
 
 
-import django_heroku
 django_heroku.settings(locals())
