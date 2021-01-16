@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'x8*(b8d9463re+t)2mgi+vrbh7!9(s6_^6c5j(76yoqy!hp(19'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.7',
                  'localhost', 'little-angels.herokuapp.com']
