@@ -1,4 +1,4 @@
 # littleAngels
-### Pet forum website project for grad-school
+### Pet forum website 
 
-Website Link : http://roqib.pythonanywhere.com/
+Website Link : http://roqib.pythonanywhere.com/ (last updated November 2021)
